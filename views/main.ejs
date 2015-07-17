@@ -22,7 +22,7 @@
 
 		<div id="thumb_imgs" class="row">
 			<% for (var i = 0; i < 12; i++ ) { %>
-				<div id="Image__<%= i+1 %>_thumb" class="thumb_img">			
+				<div id="Image_<%= i+1 %>_thumb" class="thumb_img">			
 					<img id="image_<%= i+1 %>_thumb" src="http://placehold.it/100x100"/>
 				</div>
 			<% } %>
@@ -33,33 +33,7 @@
 
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
 		<script src='/jquery.scrollto/jquery.scrollTo.min.js'></script>
-
-		<script>
-			$(document).ready(function(){ 
-
-				Number.prototype.mod = function(n) {
-					return ((this%n)+n)%n;
-				}
-
-				var current = 1;
-
-				$(document).keydown(function(event) {
-
-					console.log("#Image_" + current + "_thumb");
-					console.log(current);
-
-					if ((event.keyCode || event.which) == 37) {
-						current = (current-1).mod(13);
-						$('#full_imgs').scrollTo("#Image_" + current, 500);
-					}
-					if ((event.keyCode || event.which) == 39) {
-						current = (current+1).mod(13);
-						$('#full_imgs').scrollTo("#Image_" + current, 500);
-					}
-
-				});
-			});
-		</script>
+		<script src='/javascripts/main.js'></script>
 
   </body>
 
