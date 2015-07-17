@@ -6,61 +6,57 @@
 	</head>
   <body>
 
-		<div class="container">
+	<div class="container-fluid">
 
-			<% include navbar.ejs %>
+		<% include navbar.ejs %>
 
-			<div class="row">
-
-				<a id="scrollLeft" class="col-md-1 left carousel-control" role="button">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-				</a>
-
-				<div id="full_imgs" class="col-md-10">
-					<% for (var i = 0; i < 24; i++ ) { %>
-					<div id="Image_<%= i+1 %>" class="col-md-4 full_img">
-						<img id="image_<%= i+1 %>" src="http://placehold.it/350x350"/>
-					</div>
-					<% } %>
-				</div>
-
-				<a id="scrollRight" class="col-md-1 right carousel-control" role="button" >
-					<span class="glyphicon glyphicon-chevron-right" ></span>
-				</a>
-
+		<div id="full_imgs" class="row">
+			<% for (var i = 0; i < 12; i++ ) { %>
+			<div id="Image_<%= i+1 %>" class="full_img">
+				<img id="image_<%= i+1 %>" src="http://placehold.it/350x350"/>
+				<h5><%= i+1 %></h5>
 			</div>
-
-			<div id="thumbnail_imgs" class="row col-md-10">
-				<% for ( var i = 0; i < 24; i++ ) { %>
-					<div id="Image_<%=i%>_thumb" class="col-md-1 thumbnail_img">
-						<img src="http://placehold.it/50x50"/>
-					</div>
-				<% } %>
-			</div>
-
+			<% } %>
+			<div class="full_img"></div>
 		</div>
+
+		<div id="thumb_imgs" class="row">
+			<% for (var i = 0; i < 12; i++ ) { %>
+				<div id="Image__<%= i+1 %>_thumb" class="thumb_img">			
+					<img id="image_<%= i+1 %>_thumb" src="http://placehold.it/100x100"/>
+				</div>
+			<% } %>
+			<div class="thumb_img"></div>
+		</div>
+
+	</div>
 
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
 		<script src='/jquery.scrollto/jquery.scrollTo.min.js'></script>
 
 		<script>
 			$(document).ready(function(){ 
-				var width = $("#full_imgs").width();
-				console.log("Width: " + width);
-				$("#scrollLeft").click(function () {
-					$('#full_imgs').scrollTo( '-=1252px', 500 );
-					});
 
-				$("#scrollRight").click(function () {
-					$('#full_imgs').scrollTo( '+=1252px', 500 );
-				});
+				Number.prototype.mod = function(n) {
+					return ((this%n)+n)%n;
+				}
+
+				var current = 1;
+
 				$(document).keydown(function(event) {
+
+					console.log("#Image_" + current + "_thumb");
+					console.log(current);
+
 					if ((event.keyCode || event.which) == 37) {
-						$('#full_imgs').scrollTo( '-=1252px', 500 );
+						current = (current-1).mod(13);
+						$('#full_imgs').scrollTo("#Image_" + current, 500);
 					}
 					if ((event.keyCode || event.which) == 39) {
-						$('#full_imgs').scrollTo( '+=1252px', 500 );
+						current = (current+1).mod(13);
+						$('#full_imgs').scrollTo("#Image_" + current, 500);
 					}
+
 				});
 			});
 		</script>
