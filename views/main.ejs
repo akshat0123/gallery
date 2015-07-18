@@ -11,9 +11,10 @@
 		<% include navbar.ejs %>
 
 		<div id="full_imgs" class="row">
-			<% for (var i = 0; i < 12; i++ ) { %>
+			<% for (var i = 0; i < images.length; i++ ) { %>
 			<div id="Image_<%= i+1 %>" class="full_img">
-				<img id="image_<%= i+1 %>" src="http://placehold.it/350x350"/>
+				<img id="image_<%= i+1 %>" 
+				src="<%= cloudinary.url(images[i].public_id + '.' + images[i].format, { width:350, height:350, crop:'fill', version:images[i].version}) %>"/>
 				<h5><%= i+1 %></h5>
 			</div>
 			<% } %>
@@ -21,9 +22,10 @@
 		</div>
 
 		<div id="thumb_imgs" class="row">
-			<% for (var i = 0; i < 12; i++ ) { %>
+			<% for (var i = 0; i < images.length; i++ ) { %>
 				<div id="Image_<%= i+1 %>_thumb" class="thumb_img">			
-					<img id="image_<%= i+1 %>_thumb" src="http://placehold.it/100x100"/>
+					<img id="image_<%= i+1 %>_thumb" 
+					src="<%= cloudinary.url(images[i].public_id + '.' + images[i].format, { width:100, height:100, crop:'fill', version:images[i].version}) %>"/>
 				</div>
 			<% } %>
 			<div class="thumb_img"></div>
@@ -34,6 +36,7 @@
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
 		<script src='/jquery.scrollto/jquery.scrollTo.min.js'></script>
 		<script src='/javascripts/main.js'></script>
+		<script>var image_length = <%- images.length %></script>
 
   </body>
 

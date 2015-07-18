@@ -1,3 +1,5 @@
+var cloudinary = require('cloudinary');
+var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 
@@ -7,7 +9,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/main', function(req, res, next) {
-	res.render('main');
+
+	cloudinary.api.resources(function(items) {
+		res.render('main', { images : items.resources, cloudinary : cloudinary });
+	});
+
+//	res.render('main');
+
 });
 
 router.get('/about', function(req, res, next) {

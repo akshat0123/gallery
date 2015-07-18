@@ -1,3 +1,5 @@
+var cloudinary = require('cloudinary');
+var fs = require('fs');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -44,7 +46,11 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+	cloudinary.config({ cloud_name : 'dlr3potgj', api_key: '417733565239177', api_secret: 'XcQ8tGOaQtSLuTE9z6gN2-WPtJg' });
 }
+
+app.locals.api_key = cloudinary.config().api_key;
+app.locals.cloud_name = cloudinary.config().cloud_name;
 
 // production error handler
 // no stacktraces leaked to user
