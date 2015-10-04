@@ -46,7 +46,7 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
-	cloudinary.config({ cloud_name : 'dlr3potgj', api_key: '417733565239177', api_secret: 'XcQ8tGOaQtSLuTE9z6gN2-WPtJg' });
+	cloudinary.config({ cloud_name : '', api_key: '', api_secret: '' });
 }
 
 app.locals.api_key = cloudinary.config().api_key;
